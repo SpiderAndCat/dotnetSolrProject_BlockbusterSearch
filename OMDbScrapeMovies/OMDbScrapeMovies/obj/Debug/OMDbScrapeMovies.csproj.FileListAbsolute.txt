@@ -1,0 +1,11 @@
+C:\Users\vspiderandcat\GitHub\BlockbusterVideo_.NET_Elasticsearch\OMDbScrapeMovies\OMDbScrapeMovies\bin\Debug\OMDbScrapeMovies.exe.config
+C:\Users\vspiderandcat\GitHub\BlockbusterVideo_.NET_Elasticsearch\OMDbScrapeMovies\OMDbScrapeMovies\bin\Debug\OMDbScrapeMovies.exe
+C:\Users\vspiderandcat\GitHub\BlockbusterVideo_.NET_Elasticsearch\OMDbScrapeMovies\OMDbScrapeMovies\bin\Debug\OMDbScrapeMovies.pdb
+C:\Users\vspiderandcat\GitHub\BlockbusterVideo_.NET_Elasticsearch\OMDbScrapeMovies\OMDbScrapeMovies\bin\Debug\Newtonsoft.Json.dll
+C:\Users\vspiderandcat\GitHub\BlockbusterVideo_.NET_Elasticsearch\OMDbScrapeMovies\OMDbScrapeMovies\bin\Debug\Newtonsoft.Json.xml
+C:\Users\vspiderandcat\GitHub\BlockbusterVideo_.NET_Elasticsearch\OMDbScrapeMovies\OMDbScrapeMovies\obj\Debug\OMDbScrapeMovies.csproj.AssemblyReference.cache
+C:\Users\vspiderandcat\GitHub\BlockbusterVideo_.NET_Elasticsearch\OMDbScrapeMovies\OMDbScrapeMovies\obj\Debug\OMDbScrapeMovies.csproj.SuggestedBindingRedirects.cache
+C:\Users\vspiderandcat\GitHub\BlockbusterVideo_.NET_Elasticsearch\OMDbScrapeMovies\OMDbScrapeMovies\obj\Debug\OMDbScrapeMovies.csproj.CoreCompileInputs.cache
+C:\Users\vspiderandcat\GitHub\BlockbusterVideo_.NET_Elasticsearch\OMDbScrapeMovies\OMDbScrapeMovies\obj\Debug\OMDbScrapeMovies.csproj.CopyComplete
+C:\Users\vspiderandcat\GitHub\BlockbusterVideo_.NET_Elasticsearch\OMDbScrapeMovies\OMDbScrapeMovies\obj\Debug\OMDbScrapeMovies.exe
+C:\Users\vspiderandcat\GitHub\BlockbusterVideo_.NET_Elasticsearch\OMDbScrapeMovies\OMDbScrapeMovies\obj\Debug\OMDbScrapeMovies.pdb
