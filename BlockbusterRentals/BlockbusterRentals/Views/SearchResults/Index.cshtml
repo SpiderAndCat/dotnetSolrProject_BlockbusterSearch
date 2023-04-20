@@ -1,8 +1,24 @@
-﻿@model BlockbusterRentals.Models.SearchResult
+﻿@model List<BlockbusterRentals.Models.SearchResult>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Results</h2>
+
+<tr>
+    <td>Hi</td>
+    @foreach (var hit in Model)
+    {
+
+        <td>@hit.Title</td>
+
+
+    }
+
+
+
+</tr>
+
+
 
