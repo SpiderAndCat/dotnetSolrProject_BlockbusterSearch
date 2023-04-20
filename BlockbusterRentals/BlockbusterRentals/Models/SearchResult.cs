@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BlockbusterRentals.Models
 {
-    public class MovieData
+    public class SearchResult
     {
 
         public string Title { get; set; }
@@ -15,7 +15,7 @@ namespace BlockbusterRentals.Models
 
         [Display(Name = "Release Date")]
         public string Released { get; set; }
-        
+
         public string Runtime { get; set; }
 
         public string Genre { get; set; }
