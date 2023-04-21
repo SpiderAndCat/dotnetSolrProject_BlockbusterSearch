@@ -6,33 +6,22 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using Nest;
 using System.Diagnostics;
+using System.Reflection;
 
 
 namespace ElasticsearchTesting
 {
-    public class SearchResult
+    public class Person
     {
-        public string Title { get; set; }
+
+        public int Id { get; set; }
+
+        public string Firstname { get; set; }
 
 
-        public string Released { get; set; }
+        public string Lastname { get; set; }
 
-        public string Runtime { get; set; }
-
-        public string Genre { get; set; }
-
-
-
-        public string Actors { get; set; }
-
-
-        public string Plot { get; set; }
-
-        public string imdbId { get; set; }
-
-
-
-        public string imdbRating { get; set; }
+     
     }
 
 
@@ -42,29 +31,80 @@ namespace ElasticsearchTesting
     {
         static void Main(string[] args)
         {
-            ElasticClient client = new ElasticClient(new ConnectionSettings().DefaultIndex("searchresult"));
-            Debug.WriteLine("Index names! \n\n" );
-          
+            ElasticClient client = new ElasticClient(new ConnectionSettings()
+                .DefaultIndex("index_two")
+                .RequestTimeout(TimeSpan.FromSeconds(30))
+            );
+            Debug.WriteLine("Begin \n\n" );
 
-            var searchResult = new SearchResult
+        if(client.Indices.Exists("my_index").Exists)
             {
-                      Title = "Spider-Man",
-                       Released = "Jan 1 2002",
-                        Runtime = "180 mins",
-                        Genre = "Superhero",
-                        Actors = "Jordan Ash, Kayla Carrera, Kira Croft, Tony DeSergio",
-                        Plot = "There was a guy",
-                        imdbId = "tt1000018",
-                        imdbRating = "4"
+                Debug.WriteLine("my_index index exists \n\n");
+
+            }
+        else
+            {
+                Debug.WriteLine("my_index index No exists \n\n");
+
+            }
+
+            if (client.Indices.Exists("index_two").Exists)
+            {
+                Debug.WriteLine("index_two index exists \n\n");
+
+            }
+            else
+            {
+                Debug.WriteLine("index_two index No exists \n\n");
+
+            }
+            /*
+            var createIndexResponse = client.Indices.Create("index_two", c => c
+              
+                    .Map<Person>(m => m
+                        .Properties(ps => ps
+                            .Text(t => t
+                                .Name(p => p.Firstname)
+                            )
+                            .Text(t => t
+                                .Name(p => p.Lastname)
+                            )
+
+                        )
+                    )
+                
+            );
+            */
+            if (client.Indices.Exists("index_two").Exists)
+            {
+                Debug.WriteLine("index_two indexs exists \n\n");
+
+            }
+            else
+            {
+                Debug.WriteLine("index_two index No exists \n\n");
+
+            }
+
+
+
+
+
+
+            var searchResult = new Person
+            {
+               
+                Id = 1,
+                Firstname = "Spider-Man",
+                       Lastname = "Hi"
 
              
             };
-
             var indexResponse = client.IndexDocument(searchResult);
 
             if(!indexResponse.IsValid)
             {
-                Debug.WriteLine("Index ERROR!\n\n");
+                Debug.WriteLine("Index ERROR!\n\n" + indexResponse.DebugInformation);
 
 
             } else
@@ -74,7 +114,8 @@ namespace ElasticsearchTesting
             }
 
 
-            var searchResponse = client.Search<SearchResult>(s => s
+            var searchResponse = client.Search<Person>(s => s
+                .AllIndices()
                 .Query(q => q
                     .MatchAll()
                 )
@@ -85,13 +126,15 @@ namespace ElasticsearchTesting
             {
                 Debug.WriteLine("Hit:");
 
-                Debug.WriteLine(hit.Source.Title);
+                Debug.WriteLine(hit.Source.Firstname);
 
             }
 
             Debug.WriteLine("\n\nend of results\n\n");
-
+   
         }
+
+
     }
 }
 
