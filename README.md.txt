@@ -65,3 +65,6 @@ internal class Program
         public string imdbRating { get; set; }
     }
 ```
+
+### (4) Shutdown server after use
+`bin\solr stop -all`
