@@ -19,8 +19,8 @@ namespace SolrTesting
             Startup.Init<Movie>("http://localhost:8983/solr/blockbuster_shard1_replica_n1");
             var solr = ServiceLocator.Current.GetInstance<ISolrOperations<Movie>>();
             var result = solr.Query(new SolrQuery("Plot:*"));
-            Debug.WriteLine(result.GetType());
-            
+            Debug.WriteLine(result.GetType()); // returns SolrNet.SolrQueryResults`1[SolrTesting.Movie]
+
 
         }
 
