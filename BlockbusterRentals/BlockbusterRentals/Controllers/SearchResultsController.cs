@@ -11,6 +11,7 @@ using SolrNet;
 using SolrNet.Commands.Parameters;
 using System.Diagnostics;
 using BlockbusterRentals.ViewModels;
+using Newtonsoft.Json.Linq;
 
 namespace BlockbusterRentals.Controllers
 {
@@ -25,8 +26,10 @@ namespace BlockbusterRentals.Controllers
         public ActionResult Index()
         {
             Console.WriteLine("Starting query");
-            SolrNet.Startup.Init<SearchResult>("http://localhost:8983/solr/blockbuster_shard1_replica_n2");
-
+            if (!ServiceLocator.IsLocationProviderSet)
+            {
+                SolrNet.Startup.Init<SearchResult>("http://localhost:8983/solr/blockbuster_shard1_replica_n2");
+            }
             //Startup.Init<SearchResult>("http://localhost:8983/solr/blockbuster_shard1_replica_n1");
             var solr = ServiceLocator.Current.GetInstance<ISolrOperations<SearchResult>>();
             var result = solr.Query(new SolrQuery("*:*"));
@@ -51,17 +54,74 @@ namespace BlockbusterRentals.Controllers
 
         
 
-        public ActionResult Search()
+        public ActionResult Search(SearchAgainViewModel again)
         {
             Console.WriteLine("Starting query");
             //Debug.WriteLine("Query: " + q + f);
 
             Console.WriteLine("Starting query");
             //SolrNet.Startup.Init<SearchResult>("http://localhost:8983/solr/blockbuster_shard1_replica_n2");
-
+            Console.WriteLine("Starting query");
+            if (!ServiceLocator.IsLocationProviderSet)
+            {
+                SolrNet.Startup.Init<SearchResult>("http://localhost:8983/solr/blockbuster_shard1_replica_n2");
+            }
             //Startup.Init<SearchResult>("http://localhost:8983/solr/blockbuster_shard1_replica_n1");
+
+
+            //0: Everything
+            //1: Title (Title)
+            //2: Description (Plot)
+            //3: Release Date (Released)
+            //4: Genre (Genre)
+            //5: Cast (Actors)
+            //6: Rating /5 (imbdRating)
+            string field = "*";
+            string query = again.SearchQuery.queryString;
+            switch (again.SearchQuery.queryType)
+            {
+                case 0:
+                    field = "*";
+                    break;
+                case 1:
+                    field = "Title";
+                    break;
+                case 2:
+                    field = "Plot";
+                    break;
+                case 3:
+                    field = "Released";
+                    break;
+                case 4:
+                    field = "Genre";
+                    break;
+                case 5:
+                    field = "Actors";
+                    break;
+                case 6:
+                    field = "imdbRating";
+                    break;
+                default:
+                    field = "*";
+                    break;
+            }
+
+
+
             var solr = ServiceLocator.Current.GetInstance<ISolrOperations<SearchResult>>();
-            var result = solr.Query(new SolrQuery("*:*"));
+            var searchFor = "";
+
+            if (field == "*")
+            {
+                searchFor = query;
+            }
+            else
+            {
+                searchFor = $"{field}:{query}";
+
+            }
+            Debug.WriteLine("\n\n\n\n\n```" + searchFor + "```");
+            var result = solr.Query(new SolrQuery(searchFor));
             Debug.WriteLine("Type\n\n\n" + result.GetType()); // returns SolrNet.SolrQueryResults`1[SolrTesting.Movie]
             foreach (var r in result)
             {
@@ -73,8 +133,8 @@ namespace BlockbusterRentals.Controllers
                 SearchResult = result,
                 SearchQuery = new SearchQuery
                 {
-                    queryString = "",
-                    queryType = 1
+                    queryString = again.SearchQuery.queryString,
+                    queryType = again.SearchQuery.queryType
                 }
 
             };
