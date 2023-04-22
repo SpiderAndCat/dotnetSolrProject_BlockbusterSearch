@@ -17,13 +17,13 @@ namespace BlockbusterRentals
 
         }
         
-        public void ConfigureServices(IServiceCollection services)
+       /* public void ConfigureServices(IServiceCollection services)
         {
             // Add SolrNet services
             var solrUrl = "http://localhost:8983/solr/blockbuster_shard1_replica_n1"; // Solr URL
             services.AddSolrNet(solrUrl); // Register Solr connection with DI container
             Console.Write("hi");
-        }
+        }*/
     }
 
 }
