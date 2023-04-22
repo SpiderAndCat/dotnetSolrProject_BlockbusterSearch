@@ -5,11 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Search</h2>
-
-
-
-<h2>Results</h2>
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
 
@@ -25,53 +20,41 @@
 </script>
 
 
-<h2>Results</h2>
-
-//0: Everything
-            //1: Title (Title)
-            //2: Description (Plot)
-            //3: Release Date (Released)
-            //4: Genre (Genre)
-            //5: Cast (Actors)
-            //6: Rating /5 (imbdRating)
 
 
 @using (Html.BeginForm("Search", "SearchResults"))
-{
+{ 
+<div>
+    <label>Search For:</label>
+    @Html.RadioButtonFor(m => m.SearchQuery.queryType, 0, Model.SearchQuery.queryType == 0 ?  new { @checked = "checked" } : null) <label for="choice-0">Everything</label>
+    @Html.RadioButtonFor(m => m.SearchQuery.queryType, 1, Model.SearchQuery.queryType == 1 ?  new { @checked = "checked" } : null) <label for="choice">Title</label>
+    @Html.RadioButtonFor(m => m.SearchQuery.queryType, 2, Model.SearchQuery.queryType == 2 ?  new { @checked = "checked" } : null) <label for="choice">Description</label>
+    @Html.RadioButtonFor(m => m.SearchQuery.queryType, 3, Model.SearchQuery.queryType == 3 ?  new { @checked = "checked" } : null) <label for="choice">Release Date</label>
+    @Html.RadioButtonFor(m => m.SearchQuery.queryType, 4, Model.SearchQuery.queryType == 4 ?  new { @checked = "checked" } : null) <label for="choice">Genre</label>
+    @Html.RadioButtonFor(m => m.SearchQuery.queryType, 5, Model.SearchQuery.queryType == 5 ?  new { @checked = "checked" } : null) <label for="choice">Cast</label>
+    @Html.RadioButtonFor(m => m.SearchQuery.queryType, 6, Model.SearchQuery.queryType == 6 ?  new { @checked = "checked" } : null) <label for="choice">Rating</label>
+</div>
+
+
+<div style="display: inline-flex">
     <div class="form-group">
-        @Html.TextBoxFor(m => m.SearchQuery.queryString, new { @class = "form-control", value = Model.SearchQuery.queryString })
+    @Html.TextBoxFor(m => m.SearchQuery.queryString, new { @class = "form-control", value = Model.SearchQuery.queryString })
     </div>
-    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
 
-        @Html.TextBoxFor(m => m.SearchQuery.queryType, new { @class = "form-control" })
-    </div>
-
+</div>
 
 
-    <button type="submit" class="btn btn-primary">Save</button>
+
+
+
+
+
+
+
+
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<tr>
-    <td>Hi</td>
-
-
     <table id="myTable" class="display">
         <thead>
             <tr>
@@ -97,7 +80,6 @@
 
 
 
-</tr>
 
 
 
