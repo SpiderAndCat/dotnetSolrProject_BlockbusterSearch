@@ -1,10 +1,15 @@
 ﻿@using SolrNet
 @model BlockbusterRentals.ViewModels.SearchAgainViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h2>Search</h2>
+
+
+
+<h2>Results</h2>
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
 
@@ -27,11 +32,11 @@
 
 @using (Html.BeginForm("Search", "SearchResults"))
 {
-   <div class="form-group">
-       @Html.TextBoxFor(m => m.SearchQuery.queryString, new { @class = "form-control" })
-       @Html.TextBoxFor(m => m.SearchQuery.queryType, new { @class = "form-control" })
+    <div class="form-group">
+        @Html.TextBoxFor(m => m.SearchQuery.queryString, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.SearchQuery.queryType, new { @class = "form-control" })
 
-   </div>
+    </div>
 
     <button type="submit" class="btn btn-primary">Save</button>
 

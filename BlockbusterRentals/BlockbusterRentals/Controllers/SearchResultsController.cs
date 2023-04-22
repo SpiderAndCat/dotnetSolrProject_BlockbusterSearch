@@ -49,19 +49,15 @@ namespace BlockbusterRentals.Controllers
             return View(display);
         }
 
-        [HttpPost]
-        public ActionResult SearchAgain(SearchAgainViewModel searchAgain)
-        {
-          
-            return RedirectToAction("Search", "SearchResults", new { q = searchAgain.SearchQuery.queryString , f = searchAgain.SearchQuery.queryType });
-        }
+        
 
-        public ActionResult Search(string q, int f)
+        public ActionResult Search()
         {
             Console.WriteLine("Starting query");
-            Debug.WriteLine("Query: " + q + f);
+            //Debug.WriteLine("Query: " + q + f);
 
-            SolrNet.Startup.Init<SearchResult>("http://localhost:8983/solr/blockbuster_shard1_replica_n2");
+            Console.WriteLine("Starting query");
+            //SolrNet.Startup.Init<SearchResult>("http://localhost:8983/solr/blockbuster_shard1_replica_n2");
 
             //Startup.Init<SearchResult>("http://localhost:8983/solr/blockbuster_shard1_replica_n1");
             var solr = ServiceLocator.Current.GetInstance<ISolrOperations<SearchResult>>();
@@ -71,7 +67,18 @@ namespace BlockbusterRentals.Controllers
             {
                 Debug.WriteLine("REsult: " + r.Title);
             }
-            return View(result);
+
+            SearchAgainViewModel display = new SearchAgainViewModel
+            {
+                SearchResult = result,
+                SearchQuery = new SearchQuery
+                {
+                    queryString = "",
+                    queryType = 1
+                }
+
+            };
+            return View(display);
         }
     }
 }
