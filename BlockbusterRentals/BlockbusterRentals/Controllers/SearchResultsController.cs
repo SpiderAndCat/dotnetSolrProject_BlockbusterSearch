@@ -122,88 +122,35 @@ namespace BlockbusterRentals.Controllers
             {
                 searchFor = query;
 
-                // More advanced
-                // searchFor = $"{field}:{query}";
-
-                // Basic Search
-                var result = solr.Query(new SolrQuery(searchFor));
-
-
-
-                SearchAgainViewModel display = new SearchAgainViewModel
-                {
-                    SearchResult = result,
-                    SearchQuery = new SearchQuery
-                    {
-                        queryString = again.SearchQuery.queryString,
-                        queryType = again.SearchQuery.queryType
-                    }
-
-                };
-                return View(display);
             }
-            else if(field != "Genre")
+            else
             {
 
                 // More advanced
                 searchFor = $"{field}:{query}";
 
-                // Basic Search
-                var result = solr.Query(new SolrQuery(searchFor));
-
-
-
-                SearchAgainViewModel display = new SearchAgainViewModel
-                {
-                    SearchResult = result,
-                    SearchQuery = new SearchQuery
-                    {
-                        queryString = again.SearchQuery.queryString,
-                        queryType = again.SearchQuery.queryType
-                    }
-
-                };
-                return View(display);
-            } 
-            else
-            {
-                //Facet Search
-                var result = solr.Query(SolrQuery.All, new QueryOptions
-                {
-                    Rows = 0,
-                    Facet = new FacetParameters
-                    {
-                        Queries = new[] { new SolrFacetFieldQuery(field) }
-                    }
-
-                });
-
-                foreach(var facet in result.FacetFields[field])
-                {
-                    Debug.WriteLine("{0}: {1}", facet.Key, facet.Value);
-                    Debug.WriteLine(result.FacetFields[field].GetType());
-                    Debug.WriteLine(facet.GetType());
-                    Debug.WriteLine(facet.ToString());
-
-
-                }
-
-
-                SearchAgainViewModel display = new SearchAgainViewModel
-                {
-                    SearchResult = result,
-                    SearchQuery = new SearchQuery
-                    {
-                        queryString = again.SearchQuery.queryString,
-                        queryType = again.SearchQuery.queryType
-                    }
-
-                };
-                return View(display);
-
+               
             }
 
-            
+            // Basic Search
+            var result = solr.Query(new SolrQuery(searchFor));
+
+
+
+            SearchAgainViewModel display = new SearchAgainViewModel
+            {
+                SearchResult = result,
+                SearchQuery = new SearchQuery
+                {
+                    queryString = again.SearchQuery.queryString,
+                    queryType = again.SearchQuery.queryType
+                }
+
+            };
+            return View(display);
+
+
+
 
         }
     }
