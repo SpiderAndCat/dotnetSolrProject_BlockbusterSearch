@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using Newtonsoft.Json;
@@ -10,10 +11,10 @@ namespace MovieScraper
     {
         static void Main(string[] args)
         {
-            string apiUrl = "http://www.omdbapi.com/?i=tt{0:0000000}&apikey=YOUR_API_KEY";
+            string apiUrl = "http://www.omdbapi.com/?i=tt{0:0000000}&apikey=API_KEY";
 
-            int index = 1000010;
-            int numMovies = 890;
+            int index = 133090;
+            int numMovies = 988;
             // Completed 900 movies starting at index 100,000
 
             //Next, 999 movies starting at 415000
@@ -56,7 +57,7 @@ namespace MovieScraper
             }
 
             // create a directory to store the movie data files
-            string dataDir = "MovieData";
+            string dataDir = "MoviesDataNew";
             if (!Directory.Exists(dataDir))
             {
                 Directory.CreateDirectory(dataDir);
@@ -71,6 +72,35 @@ namespace MovieScraper
             }
 
             Console.WriteLine($"Scraped and saved {movies.Count} movies.");
+
+
+
+            
+            //Clean files
+
+            string[] jsonFiles = Directory.GetFiles(dataDir, "*.json");
+
+            foreach (string file in jsonFiles)
+            {
+                bool shouldDeleteFile = false;
+                string fileContent = File.ReadAllText(file);
+
+                if (fileContent.Contains("#DUPE#")
+                    || fileContent.Contains("Title:\" \"Episode")
+                    || fileContent.Contains("\"N/A\""))
+                {
+                    shouldDeleteFile = true;
+                }
+
+                if (shouldDeleteFile)
+                {
+                    File.Delete(file);
+                }
+            }
+
+            Debug.WriteLine("Json file cleanup complete.");
+
+            
         }
     }
 
