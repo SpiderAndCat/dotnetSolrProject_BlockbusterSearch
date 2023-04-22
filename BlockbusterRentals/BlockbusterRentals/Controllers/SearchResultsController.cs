@@ -12,6 +12,7 @@ using SolrNet.Commands.Parameters;
 using System.Diagnostics;
 using BlockbusterRentals.ViewModels;
 using Newtonsoft.Json.Linq;
+using SolrNet.Impl;
 
 namespace BlockbusterRentals.Controllers
 {
@@ -33,11 +34,7 @@ namespace BlockbusterRentals.Controllers
             //Startup.Init<SearchResult>("http://localhost:8983/solr/blockbuster_shard1_replica_n1");
             var solr = ServiceLocator.Current.GetInstance<ISolrOperations<SearchResult>>();
             var result = solr.Query(new SolrQuery("*:*"));
-            Debug.WriteLine("Type\n\n\n" + result.GetType()); // returns SolrNet.SolrQueryResults`1[SolrTesting.Movie]
-            foreach (var r in result)
-            {
-                Debug.WriteLine("REsult: " + r.Title);
-            }
+         
 
             SearchAgainViewModel display = new SearchAgainViewModel
             {
@@ -45,7 +42,7 @@ namespace BlockbusterRentals.Controllers
                 SearchQuery = new SearchQuery
                 {
                     queryString = "",
-                    queryType = 1
+                    queryType = 4
                 }
 
             };
@@ -111,13 +108,6 @@ namespace BlockbusterRentals.Controllers
             var solr = ServiceLocator.Current.GetInstance<ISolrOperations<SearchResult>>();
             var searchFor = "";
 
-
-
-
-
-            // Basic Search
-            //var result = solr.Query(new SolrQuery(searchFor));
-
             if (field == "*")
             {
                 searchFor = query;
@@ -133,7 +123,44 @@ namespace BlockbusterRentals.Controllers
             }
 
             // Basic Search
-            var result = solr.Query(new SolrQuery(searchFor));
+            var result = solr.Query(new SolrQuery(searchFor), 
+                new QueryOptions
+                {
+                    Highlight = new HighlightingParameters
+                    {
+                        Fields = new[] { field}
+                    }
+
+            });
+
+
+
+
+           // [
+           //     ["stringKey", <Highlights>]
+           //]
+            foreach(var highlight in result.Highlights)
+
+            {
+                //Debug.WriteLine($" {highlight.GetType()} What{highlight.Key}:{highlight.Value}");
+                Debug.WriteLine($" What{highlight.Key}:");
+
+                foreach (var v in highlight.Value)
+                {
+                    Debug.WriteLine($"VALUE===== {v.GetType()} : {v.Key} :: {v.Value}");
+
+                }
+
+
+
+
+
+            }
+
+
+
+
+
 
 
 

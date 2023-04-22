@@ -9,6 +9,11 @@ namespace BlockbusterRentals.Models
 {
     public class SearchResult
     {
+
+        [SolrField("id")]
+        public string id { get; set; }
+
+
         [SolrField("Title")]
         public string Title { get; set; }
 
