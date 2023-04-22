@@ -25,27 +25,14 @@ namespace BlockbusterRentals.Controllers
         // GET: SearchResults
         public ActionResult Index()
         {
-            Console.WriteLine("Starting query");
-            if (!ServiceLocator.IsLocationProviderSet)
-            {
-                SolrNet.Startup.Init<SearchResult>("http://localhost:8983/solr/blockbuster_shard1_replica_n2");
-            }
-            //Startup.Init<SearchResult>("http://localhost:8983/solr/blockbuster_shard1_replica_n1");
-            var solr = ServiceLocator.Current.GetInstance<ISolrOperations<SearchResult>>();
-            var result = solr.Query(new SolrQuery("*:*"));
-            Debug.WriteLine("Type\n\n\n" + result.GetType()); // returns SolrNet.SolrQueryResults`1[SolrTesting.Movie]
-            foreach (var r in result)
-            {
-                Debug.WriteLine("REsult: " + r.Title);
-            }
-
+            
             SearchAgainViewModel display = new SearchAgainViewModel
             {
-                SearchResult = result,
+                SearchResult = new SearchResult,
                 SearchQuery = new SearchQuery
                 {
                     queryString = "",
-                    queryType = 1
+                    queryType = 0
                 }
 
             };
@@ -113,14 +100,13 @@ namespace BlockbusterRentals.Controllers
 
             if (field == "*")
             {
-                searchFor = query;
+                searchFor = $"*{query}*";
             }
             else
             {
-                searchFor = $"{field}:{query}";
+                searchFor = $"{field}:*{query}*";
 
             }
-            Debug.WriteLine("\n\n\n\n\n```" + searchFor + "```");
             var result = solr.Query(new SolrQuery(searchFor));
             Debug.WriteLine("Type\n\n\n" + result.GetType()); // returns SolrNet.SolrQueryResults`1[SolrTesting.Movie]
             foreach (var r in result)
