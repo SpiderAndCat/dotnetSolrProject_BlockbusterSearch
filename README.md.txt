@@ -68,3 +68,8 @@ internal class Program
 
 ### (4) Shutdown server after use
 `bin\solr stop -all`
+
+### (5) Resume server
+`bin\solr start -c -p 8983 -s example\cloud\node1\solr`
+
+troubleshoot: delete all replicas on second port. have 1 replica per shard

@@ -1,57 +1,42 @@
 ﻿@using SolrNet
-@model SolrQueryResults<BlockbusterRentals.Models.SearchResult>
+@model BlockbusterRentals.ViewModels.SearchAgainViewModel
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
-
-<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#myTable').DataTable({
-            searching: false,ordering: false
-        });
-    });
-</script>
-
-
 <h2>Results</h2>
-
-<tr>
-    <td>Hi</td>
-
-
-    <table id="myTable" class="display">
-        <thead>
-            <tr>
-                <th>Movie</th>
-                <th>Released</th>
-                <th>Genre</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var hit in Model)
-            {
-                <tr>
-                    <td>@hit.Title</td>
-                    <td>@hit.Released</td>
-                    <td>@hit.Genre</td>
-
-
-                </tr>
-            }
-        </tbody>
-    </table>
+//0: Everything
+            //1: Title (Title)
+            //2: Description (Plot)
+            //3: Release Date (Released)
+            //4: Genre (Genre)
+            //5: Cast (Actors)
+            //6: Rating /5 (imbdRating)
 
 
 
-</tr>
+@using (Html.BeginForm("Search", "SearchResults"))
+{
+    <div class="form-group">
+        @Html.TextBoxFor(m => m.SearchQuery.queryString, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.SearchQuery.queryType, new { @class = "form-control" })
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+
+}
+
+
+
+
+
+
+
+
+
 
 
 
