@@ -10,6 +10,7 @@ using System.Web.Security;
 using System.Web.SessionState;
 using AutoMapper;
 using BlockbusterRentals.App_Start;
+using BlockbusterRentals.Models;
 
 namespace BlockbusterRentals
 {
@@ -23,6 +24,8 @@ namespace BlockbusterRentals
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+
         }
     }
 }

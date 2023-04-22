@@ -1,9 +1,4 @@
-﻿
-
-
-
-
-using Microsoft.Ajax.Utilities;
+﻿using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,45 +6,35 @@ using System.Web;
 using System.Web.Mvc;
 using Nest;
 using BlockbusterRentals.Models;
+using CommonServiceLocator;
+using SolrNet;
+using SolrNet.Commands.Parameters;
+using System.Diagnostics;
 
 namespace BlockbusterRentals.Controllers
 {
     public class SearchResultsController : Controller
     {
 
-        // Set up ElasticSearch
 
-        ElasticClient client = new ElasticClient(new ConnectionSettings(new Uri("http://localhost:9200"))
-            .DefaultIndex("Index/movieData"));
-
+       
 
 
         // GET: SearchResults
         public ActionResult Index()
         {
             Console.WriteLine("Starting query");
-            // Structure teh search query
-            var searchResponse = client.Search<SearchResult>(s => s
-            .Query(q => q
-                .Match(m => m
-                    .Field(f => f.Title)
-                    .Query("Her Wicked Ways")
-                    )
-                )
-            );
+            SolrNet.Startup.Init<SearchResult>("http://localhost:8983/solr/blockbuster_shard1_replica_n1");
 
-            // Extract the search results into the MVC domain model SearchResult
-            List<SearchResult> results = new List<SearchResult>();
-            Console.WriteLine("Showing hits");
-
-            foreach (var hit in searchResponse.Hits)
+            //Startup.Init<SearchResult>("http://localhost:8983/solr/blockbuster_shard1_replica_n1");
+            var solr = ServiceLocator.Current.GetInstance<ISolrOperations<SearchResult>>();
+            var result = solr.Query(new SolrQuery("*:*"));
+            Debug.WriteLine("Type\n\n\n" + result.GetType()); // returns SolrNet.SolrQueryResults`1[SolrTesting.Movie]
+            foreach (var r in result)
             {
-                Console.WriteLine("Hit:");
-
-                results.Add(hit.Source);
-            }
-
-            return View(results);
+                Debug.WriteLine("REsult: " + r.Title);
+            } 
+            return View(result);
         }
     }
 }
