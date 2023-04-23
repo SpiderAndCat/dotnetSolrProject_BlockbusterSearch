@@ -66,12 +66,14 @@
     <tbody>
         @foreach (var hit in Model.SearchResult)
         {
-            <tr style="background-color: transparent">
+            <tr style="background-color: #363e9866">
                 <td>
                     <h3>@hit.Title</h3>
-                    <h6>Rated: @hit.imdbRating/10</h6>
-                    <h6>Genre: @hit.Genre</h6>
-                    <h6>Release Date:  @hit.Released</h6>
+                    <h6><b>Rated:</b> @hit.imdbRating/10</h6>
+                    <h6><b>Genre:</b> @hit.Genre</h6>
+                    <h6><b>Release Date:</b>  @hit.Released</h6>
+                    <h6><b>Cast:</b>  @hit.Actors</h6>
+
                     <p>@hit.Plot</p>
                 </td>
 
