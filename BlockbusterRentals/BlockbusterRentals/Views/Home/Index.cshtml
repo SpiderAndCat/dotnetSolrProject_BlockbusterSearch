@@ -32,7 +32,7 @@
 
                 <div style="display: inline-flex" id="searching">
                     <div class="form-group" id="searchBox">
-                        @Html.TextBoxFor(m => m.SearchQuery.queryString, new { @class = "form-control", placeholder = "Enter your search" })
+                        @Html.TextBoxFor(m => m.SearchQuery.queryString, new { @class = "form-control", placeholder = "Enter your search", autocomplete = "off" })
                     </div>
                     <button type="submit" class="btn btn-primary" id="searchButton">Search</button>
 
