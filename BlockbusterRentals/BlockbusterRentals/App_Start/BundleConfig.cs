@@ -26,7 +26,7 @@ namespace BlockbusterRentals
     
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-quartz.css",
                       "~/Content/datatables/css/datatables.bootstrap.css",
                       "~/Content/site.css"));
         }
