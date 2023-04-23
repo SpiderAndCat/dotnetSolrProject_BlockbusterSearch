@@ -1,4 +1,6 @@
-﻿@{
+﻿@using SolrNet
+@model BlockbusterRentals.ViewModels.SearchAgainViewModel
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -7,6 +9,39 @@
     <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
     <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
+
+
+
+
+@using (Html.BeginForm("Search", "SearchResults"))
+{
+    <div>
+        <label>Search For:</label>
+        @Html.RadioButtonFor(m => m.SearchQuery.queryType, 0, new { @checked = "checked" }) <label for="choice-0">Everything</label>
+        @Html.RadioButtonFor(m => m.SearchQuery.queryType, 1) <label for="choice">Title</label>
+        @Html.RadioButtonFor(m => m.SearchQuery.queryType, 2) <label for="choice">Description</label>
+        @Html.RadioButtonFor(m => m.SearchQuery.queryType, 3) <label for="choice">Release Date</label>
+        @Html.RadioButtonFor(m => m.SearchQuery.queryType, 4) <label for="choice">Genre</label>
+        @Html.RadioButtonFor(m => m.SearchQuery.queryType, 5) <label for="choice">Cast</label>
+        @Html.RadioButtonFor(m => m.SearchQuery.queryType, 6) <label for="choice">Rating</label>
+    </div>
+
+
+    <div style="display: inline-flex">
+        <div class="form-group">
+            @Html.TextBoxFor(m => m.SearchQuery.queryString, new { @class = "form-control", placeholder = "Enter your search" })
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+
+    </div>
+
+}
+
+
+
+
+
+
 
 <div class="row">
     <div class="col-md-4">

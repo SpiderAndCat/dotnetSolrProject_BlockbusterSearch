@@ -1,0 +1,88 @@
+﻿@using SolrNet
+@model BlockbusterRentals.ViewModels.SearchAgainViewModel
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable({
+            searching: false, ordering: false
+        });
+    });
+</script>
+
+
+
+
+@using (Html.BeginForm("Search", "Home"))
+{
+    <div>
+        <label>Search For:</label>
+        @Html.RadioButtonFor(m => m.SearchQuery.queryType, 0, Model.SearchQuery.queryType == 0 ? new { @checked = "checked" } : null) <label for="choice-0">Everything</label>
+        @Html.RadioButtonFor(m => m.SearchQuery.queryType, 1, Model.SearchQuery.queryType == 1 ? new { @checked = "checked" } : null) <label for="choice">Title</label>
+        @Html.RadioButtonFor(m => m.SearchQuery.queryType, 2, Model.SearchQuery.queryType == 2 ? new { @checked = "checked" } : null) <label for="choice">Description</label>
+        @Html.RadioButtonFor(m => m.SearchQuery.queryType, 3, Model.SearchQuery.queryType == 3 ? new { @checked = "checked" } : null) <label for="choice">Release Date</label>
+        @Html.RadioButtonFor(m => m.SearchQuery.queryType, 4, Model.SearchQuery.queryType == 4 ? new { @checked = "checked" } : null) <label for="choice">Genre</label>
+        @Html.RadioButtonFor(m => m.SearchQuery.queryType, 5, Model.SearchQuery.queryType == 5 ? new { @checked = "checked" } : null) <label for="choice">Cast</label>
+        @Html.RadioButtonFor(m => m.SearchQuery.queryType, 6, Model.SearchQuery.queryType == 6 ? new { @checked = "checked" } : null) <label for="choice">Rating</label>
+    </div>
+
+
+    <div style="display: inline-flex">
+        <div class="form-group">
+            @Html.TextBoxFor(m => m.SearchQuery.queryString, new { @class = "form-control", value = Model.SearchQuery.queryString })
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+}
+<table id="myTable" class="display">
+    <thead>
+        <tr>
+            <th>Movie</th>
+            <th>Released</th>
+            <th>Genre</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var hit in Model.SearchResult)
+        {
+            <tr>
+                <td>@hit.Title</td>
+                <td>@hit.Released</td>
+                <td>@hit.Genre</td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
