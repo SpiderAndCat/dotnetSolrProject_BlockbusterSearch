@@ -6,31 +6,30 @@
 }
 
 
-<h2>Results</h2>
-//0: Everything
-            //1: Title (Title)
-            //2: Description (Plot)
-            //3: Release Date (Released)
-            //4: Genre (Genre)
-            //5: Cast (Actors)
-            //6: Rating /5 (imbdRating)
-
-
 
 @using (Html.BeginForm("Search", "SearchResults"))
 {
-    <div class="form-group">
-        @Html.TextBoxFor(m => m.SearchQuery.queryString, new { @class = "form-control" })
-        @Html.TextBoxFor(m => m.SearchQuery.queryType, new { @class = "form-control" })
+    <div>
+        <label>Search For:</label>
+        @Html.RadioButtonFor(m => m.SearchQuery.queryType, 0, new { @checked = "checked" }) <label for="choice-0">Everything</label>
+        @Html.RadioButtonFor(m => m.SearchQuery.queryType, 1) <label for="choice">Title</label>
+        @Html.RadioButtonFor(m => m.SearchQuery.queryType, 2) <label for="choice">Description</label>
+        @Html.RadioButtonFor(m => m.SearchQuery.queryType, 3) <label for="choice">Release Date</label>
+        @Html.RadioButtonFor(m => m.SearchQuery.queryType, 4) <label for="choice">Genre</label>
+        @Html.RadioButtonFor(m => m.SearchQuery.queryType, 5) <label for="choice">Cast</label>
+        @Html.RadioButtonFor(m => m.SearchQuery.queryType, 6) <label for="choice">Rating</label>
+    </div>
+
+
+    <div style="display: inline-flex">
+        <div class="form-group">
+            @Html.TextBoxFor(m => m.SearchQuery.queryString, new { @class = "form-control", placeholder = "Enter your search"  })
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
 
     </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
-
 }
-
-
-
 
 
 
