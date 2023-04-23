@@ -9,64 +9,91 @@
       background-position: center center;
       background-size: auto 100%;
       height: 100vh;">
-    <div class="jumbotron">
-        <h1>ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-    </div>
+   
 
 
+    <div id="searchArea" style="position: absolute; top: 50%; transform: translate(0%, -50%); vertical-align: middle; width: 100%; text-align: center;margin-bottom: 30px;">
 
 
-    @using (Html.BeginForm("Search", "Home"))
-    {
-        <div>
-            <label>Search For:</label>
-            @Html.RadioButtonFor(m => m.SearchQuery.queryType, 0, new { @checked = "checked" }) <label for="choice-0">Everything</label>
-            @Html.RadioButtonFor(m => m.SearchQuery.queryType, 1) <label for="choice">Title</label>
-            @Html.RadioButtonFor(m => m.SearchQuery.queryType, 2) <label for="choice">Description</label>
-            @Html.RadioButtonFor(m => m.SearchQuery.queryType, 3) <label for="choice">Release Date</label>
-            @Html.RadioButtonFor(m => m.SearchQuery.queryType, 4) <label for="choice">Genre</label>
-            @Html.RadioButtonFor(m => m.SearchQuery.queryType, 5) <label for="choice">Cast</label>
-            @Html.RadioButtonFor(m => m.SearchQuery.queryType, 6) <label for="choice">Rating</label>
+            <img src='/Content/blockbuster search logo.png' alt="Image" style="width: 50%; min-width: 180px; justify-content: center;"></img>
+            @using (Html.BeginForm("Search", "Home"))
+            {
+                <div style="margin-bottom: 20px;">
+                    <label style="font-weight: 900; color: #fae800">Search For:</label>
+                    @Html.RadioButtonFor(m => m.SearchQuery.queryType, 0, new { @checked = "checked" }) <label for="choice-0">Everything</label>
+                    @Html.RadioButtonFor(m => m.SearchQuery.queryType, 1) <label for="choice">Title</label>
+                    @Html.RadioButtonFor(m => m.SearchQuery.queryType, 2) <label for="choice">Description</label>
+                    @Html.RadioButtonFor(m => m.SearchQuery.queryType, 3) <label for="choice">Release Date</label>
+                    @Html.RadioButtonFor(m => m.SearchQuery.queryType, 4) <label for="choice">Genre</label>
+                    @Html.RadioButtonFor(m => m.SearchQuery.queryType, 5) <label for="choice">Cast</label>
+                    @Html.RadioButtonFor(m => m.SearchQuery.queryType, 6) <label for="choice">Rating</label>
+                </div>
+
+
+                <div style="display: inline-flex" id="searching">
+                    <div class="form-group" id="searchBox">
+                        @Html.TextBoxFor(m => m.SearchQuery.queryString, new { @class = "form-control", placeholder = "Enter your search" })
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="searchButton">Search</button>
+
+                </div>
+
+            }
+
         </div>
 
 
-        <div style="display: inline-flex">
-            <div class="form-group">
-                @Html.TextBoxFor(m => m.SearchQuery.queryString, new { @class = "form-control", placeholder = "Enter your search" })
-            </div>
-            <button type="submit" class="btn btn-primary">Save</button>
 
-        </div>
+
+</body>
+
+<style>
+
+    #searchBox {
+        margin-right: 1rem;
+        width: 100%;
 
     }
 
+    #searchButton {
+        font-weight: 600;
+        text-align: center;
+        padding: 0;
+        width: 6rem;
+    }
 
+        #searchButton:hover {
+            font-weight: 900;
+            text-align: center;
+            padding: 0;
+            width: 6rem;
+        }
+    
 
+    input[type="radio"] {
+        appearance: none;
 
+        width: 1em;
+        height: 1em;
+        border: 1px solid #999;
+        border-radius: 50%;
+        background-color: #363e98;
+vertical-align: middle;
+margin: 0;
+padding: 0;
 
+    }
+        input[type="radio"]:checked {
+            background-color: #fae800;
+            border: 4px solid #363e98;
+        }
+       
+       
+    input[type="radio"]:hover {
+       
+        background-color: #fae800;
+    }
 
+     
 
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </div>
-    </div>
-</body>
+    </style>
