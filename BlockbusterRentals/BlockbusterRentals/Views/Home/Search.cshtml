@@ -59,19 +59,21 @@
 <table id="myTable" class="display">
     <thead>
         <tr>
-            <th>Movie</th>
-            <th>Released</th>
-            <th>Genre</th>
+            <th>Movie Results</th>
 
         </tr>
     </thead>
     <tbody>
         @foreach (var hit in Model.SearchResult)
         {
-            <tr>
-                <td>@hit.Title</td>
-                <td>@hit.Released</td>
-                <td>@hit.Genre</td>
+            <tr style="background-color: transparent">
+                <td>
+                    <h3>@hit.Title</h3>
+                    <h6>Rated: @hit.imdbRating/10</h6>
+                    <h6>Genre: @hit.Genre</h6>
+                    <h6>Release Date:  @hit.Released</h6>
+                    <p>@hit.Plot</p>
+                </td>
 
 
             </tr>
