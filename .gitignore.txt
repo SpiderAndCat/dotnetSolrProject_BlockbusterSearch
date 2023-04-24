@@ -1,9 +1,0 @@
-BlockbusterRentals/.vs/BlockbusterRentals/v17/.suo
-BlockbusterRentals/BlockbusterRentals/Content/bb inside color.png
-BlockbusterRentals/BlockbusterRentals/Content/bb outside color.png
-BlockbusterRentals/BlockbusterRentals/Controllers/SearchResultsController.cs
-BlockbusterRentals/BlockbusterRentals/bin/BlockbusterRentals.dll
-BlockbusterRentals/BlockbusterRentals/bin/BlockbusterRentals.pdb
-BlockbusterRentals/BlockbusterRentals/obj/Debug/BlockbusterRentals.dll
-BlockbusterRentals/BlockbusterRentals/obj/Debug/BlockbusterRentals.pdb
-BlockbusterRentals/BlockbusterRentals/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
