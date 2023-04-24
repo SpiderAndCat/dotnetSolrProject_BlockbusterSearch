@@ -32,7 +32,9 @@
 
 
             <div style="display: flex; align-items: center; justify-content: center; margin: 20px; text-align: center;">
-                <img src='/Content/blockbuster search logo.png' alt="Image" style="width: 6rem; min-width: 180px; margin-top: 1rem; margin-right: 0;"></img>
+                <a href="/Home/Index"><img src='/Content/blockbuster search logo.png' alt="Image" style="width: 6rem; min-width: 180px; margin-top: 1rem; margin-right: 0;"></img>
+                </a>
+                
                 <div class="form-group" style="margin-left: 0.5rem; margin-right: 0.5rem; flex-grow: 1; height: 3rem; display: flex; align-items: center;">
                     @Html.TextBoxFor(m => m.SearchQuery.queryString, new { @class = "form-control", placeholder = "Enter your search", autocomplete = "off", style = "height: 100%; margin-right: 0.5rem;" })
                     <button type="submit" class="btn btn-primary" id="searchButton" style="height: 100%;">Search</button>
