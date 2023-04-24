@@ -35,59 +35,60 @@ Make sure the collection was created successfully by going in your browser to `l
 \n\n
 Select `blockbuster`\n
 Then, we need to add the columns and types, so that the auto indexer does not confuse the dataset types.\n\n
-Click Schema, and then add each of the following Fields by clicking Add Field for each:\n
-name: Title\n
-field type: string\n
-Make sure only "stored" is checked off\n
-Add Field
+Click Schema, and then add each of the following Fields by clicking Add Field for each:
 
-\n\n
-name: Released\n
-field type: string\n
-Make sure only "stored" is checked off\n
-Add Field
 
-\n\n
-name: Plot\n
-field type: string\n
-Make sure only "stored" is checked off\n
-Add Field
-
-\n\n
-name: Actors\n
-field type: string\n
-Make sure only "stored" is checked off\n
-Add Field
-
-\n\n
-name: Genre\n
-field type: string\n
-Make sure only "stored" is checked off\n
+name: Title
+field type: string
+Make sure only "stored" is checked off
 Add Field
 
 
-\n\n
-name: Runtime\n
-field type: string\n
-Make sure only "stored" is checked off\n
+name: Released
+field type: string
+Make sure only "stored" is checked off
 Add Field
 
-\n\n
-name: imdbRating\n
-field type: string\n
-Make sure only "stored" is checked off\n
+name: Plot
+field type: string
+Make sure only "stored" is checked off
 Add Field
 
-\n\n
-name: imdbID\n
-field type: string\n
-Make sure only "stored" is checked off\n
+name: Actors
+field type: string
+Make sure only "stored" is checked off
+Add Field
+
+
+name: Genre
+field type: string
+Make sure only "stored" is checked off
+Add Field
+
+name: Runtime
+field type: string
+Make sure only "stored" is checked off
+Add Field
+
+
+name: imdbRating
+field type: string
+Make sure only "stored" is checked off
+Add Field
+
+
+name: imdbID
+field type: string
+Make sure only "stored" is checked off
 Add Field
 
 ### 4) Index the provided Movie Data; run this command in your Solr doqnload directory
-For ease of use, you can move the `movieData` folder to your Desktop for this step.\n
+For ease of use, you can move the `movieData` folder to your Desktop for this step.
 In the Solr project directory, again in terminal, run:\n
-`java -jar -Dc=blockbuster -Dauto example\exampledocs\post.jar C:\Users\<your_user>\Desktop\movieData\*.json`\n
+`java -jar -Dc=blockbuster -Dauto example\exampledocs\post.jar C:\Users\<your_user>\Desktop\movieData\*.json`
+
+Based on your computer, this indexing process should only take about 1 to 2 mins.
+
 To test that this suceeded, go back into the Admin UI in your browser. Select the blockbuster Core, click the Query tab. In the `q` field, enter `*:*`, then scroll down, and click `Execute Query` (or a similarly named button). If it is successful, you should see JSON data to the right with Movie objects, having Title, Released, Cast, and more fields.
 
 ### (5) Shutdown server after use (can skip for now)
@@ -105,12 +106,22 @@ All Package dependancies should be included in the Git repo. If not, you will ne
 
 **troubleshoot:** On some machines, the Solr dataset migration may not line up to the same Node naming convention. This will cause the Solr file migration, and the Visual Studio code, to be out of sync.\n\n
 
-Make sure that the node, shard, and replica name in the Solr Admin console in your browser MATCH the url in Visual studio (and for Solr Step 6). The Visual Studio line is in `Controller\HomeController.cs`, `Index()`, \n\n
+Make sure that the node, shard, and replica name in the Solr Admin console in your browser MATCH the url in Visual studio (and for Solr Step 6). The Visual Studio line is in `Controllers\HomeController.cs`, `Search()`, `SolrNet.Startup.Init....("http://localhost:8983/solr/blockbuster_shard1_replica_n2")`.
+
+You may need to change it to
+`("http://localhost:8983/solr/blockbuster_shard1_replica_n1")`, or whatever `n<number>` your configuration setup.
+
+Or, if you are setting up Solr for the first time, and you haven't used it before, you may need to use:
+`("http://localhost:8983/solr/blockbuster")`
 
 ### (2) Click Build and Run in Visual Studio!
-The Home controller Index action is where the demo app is targetted to launch from. Your browser should auto open, otherwise go to `http://localhost*8983`\n\n
-**Troubleshoot:** HTTPS should be disabled for the localhost running in the project, so the browser should accept http. You may need to go into Project > Properties > Web to change the project URL to http from https if you encounter that error.
+The Home controller Index action is where the demo app is targetted to launch from. Your browser should auto open, otherwise go to `http://localhost*8983`
 
+
+**Troubleshoot:** HTTPS should be disabled for the localhost running in the project, so the browser should accept http. You may need to go into Solution Explorer > right click Project > Properties > Web to change the project URL to http from https if you are prompted to use HTTPS.
+
+
+### Voila! Enjoy your searching!
 
 ### DISCLAIMER: 
-The movie data was gathered with the OMDb API. Movie data is not guarenteed to be accurate, and it has not been screened for inappropriate or offensive content. There are about 3,000 movie entries, since many of the several-thousand Movie records retreieved from the OMDb database were not official IMDb movie record Ids -- ie, Movie Ids are random, and some Id numbers do not pertain to an actual movie.
+The movie data was gathered with the OMDb API. Movie data is not guarenteed to be accurate, and it has not been screened for inappropriate or offensive content. There are about 3,000 movie entries, since many of the several-thousand Movie records retreieved from the OMDb database were not official IMDb movie record Ids -- ie, Movie Ids are random, and some Id numbers do not pertain to an actual movie. This is also a personal project, and not officially from Blockbuster.
