@@ -102,7 +102,7 @@ To test that this suceeded, go back into the Admin UI in your browser. Select th
 ### (1) Open the Visual Studio Project in the GitHub repo by double clicking the file `BlockbusterRentals\BlockbusterRentals.sln`
 All Package dependancies should be included in the Git repo. If not, you will need to use PM> to: `install-package SolrNet`
 
-###
+
 **troubleshoot:** On some machines, the Solr dataset migration may not line up to the same Node naming convention. This will cause the Solr file migration, and the Visual Studio code, to be out of sync.\n\n
 
 Make sure that the node, shard, and replica name in the Solr Admin console in your browser MATCH the url in Visual studio (and for Solr Step 6). The Visual Studio line is in `Controller\HomeController.cs`, `Index()`, \n\n
