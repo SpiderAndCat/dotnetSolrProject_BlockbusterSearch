@@ -25,10 +25,11 @@ namespace BlockbusterRentals.Controllers
         // GET: SearchResults
         public ActionResult Index()
         {
-            
+           
+
             SearchAgainViewModel display = new SearchAgainViewModel
             {
-                SearchResult = new SearchResult,
+                SearchResult = new SolrQueryResults<BlockbusterRentals.Models.SearchResult> { },
                 SearchQuery = new SearchQuery
                 {
                     queryString = "",
@@ -102,16 +103,21 @@ namespace BlockbusterRentals.Controllers
             {
                 searchFor = $"*{query}*";
             }
+            else if (field == "imdbRating")
+            {
+                searchFor = $"imdbRating:{query}.*";
+            }
             else
             {
                 searchFor = $"{field}:*{query}*";
 
             }
+            Debug.WriteLine("\n\n\n\n\n```" + searchFor + "```");
             var result = solr.Query(new SolrQuery(searchFor));
             Debug.WriteLine("Type\n\n\n" + result.GetType()); // returns SolrNet.SolrQueryResults`1[SolrTesting.Movie]
             foreach (var r in result)
             {
-                Debug.WriteLine("REsult: " + r.Title);
+                Debug.WriteLine("REsult: " + r.imdbRating);
             }
 
             SearchAgainViewModel display = new SearchAgainViewModel

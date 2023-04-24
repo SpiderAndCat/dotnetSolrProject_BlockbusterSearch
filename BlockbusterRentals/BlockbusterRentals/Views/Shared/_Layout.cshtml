@@ -9,14 +9,8 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    @Html.Partial("_NavBar")
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Blockbuster</p>
-        </footer>
-    </div>
+    @RenderBody()
+  
 
     @Scripts.Render("~/bundles/lib")
     @RenderSection("scripts", required: false)

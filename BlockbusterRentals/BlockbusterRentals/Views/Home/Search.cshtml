@@ -1,0 +1,218 @@
+﻿@using SolrNet
+@model BlockbusterRentals.ViewModels.SearchAgainViewModel
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable({
+            searching: false, ordering: false, scrollY: '300px',
+ // Set the height of the table to 300px
+            paging: true, // Enable pagination
+            pagingType: 'simple_numbers',
+        });
+    });
+</script>
+<body id="searchBody">
+
+
+
+    @using (Html.BeginForm("Search", "Home"))
+    {
+        <div id="searchArea" style="width: 100%; text-align: center;margin-bottom: 0px;">
+
+
+            <div style="display: flex; align-items: center; justify-content: center; margin: 20px; text-align: center;">
+                <a href="/Home/Index"><img src='/Content/blockbuster search logo.png' alt="Image" style="width: 6rem; min-width: 180px; margin-top: 1rem; margin-right: 0;"></img>
+                </a>
+                
+                <div class="form-group" style="margin-left: 0.5rem; margin-right: 0.5rem; flex-grow: 1; height: 3rem; display: flex; align-items: center;">
+                    @Html.TextBoxFor(m => m.SearchQuery.queryString, new { @class = "form-control", placeholder = "Enter your search", autocomplete = "off", style = "height: 100%; margin-right: 0.5rem;" })
+                    <button type="submit" class="btn btn-primary" id="searchButton" style="height: 100%;">Search</button>
+                </div>
+            </div>
+
+
+            <div style="margin-bottom: 0px; width: 100%; text-align: center;">
+                <label style="font-weight: 900; color: #fae800">Search For:</label>
+                @Html.RadioButtonFor(m => m.SearchQuery.queryType, 0, new { @checked = "checked" }) <label for="choice-0">Everything</label>
+                @Html.RadioButtonFor(m => m.SearchQuery.queryType, 1) <label for="choice">Title</label>
+                @Html.RadioButtonFor(m => m.SearchQuery.queryType, 2) <label for="choice">Description</label>
+                @Html.RadioButtonFor(m => m.SearchQuery.queryType, 3) <label for="choice">Release Date</label>
+                @Html.RadioButtonFor(m => m.SearchQuery.queryType, 4) <label for="choice">Genre</label>
+                @Html.RadioButtonFor(m => m.SearchQuery.queryType, 5) <label for="choice">Cast</label>
+                @Html.RadioButtonFor(m => m.SearchQuery.queryType, 6) <label for="choice">Rating</label>
+            </div>
+
+            </div>
+
+            }
+
+
+            <div id="tableDisplay">
+                <table id="myTable" class="display">
+                    <thead>
+                        <tr>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var hit in Model.SearchResult)
+                        {
+                            <tr style="background-color: #363e9866">
+                                <td>
+                                    <h3 id="titleLabel">@hit.Title</h3>
+                                    <h6><b>Rated:</b> @hit.imdbRating/10</h6>
+                                    <h6><b>Genre:</b> @hit.Genre</h6>
+                                    <h6><b>Release Date:</b>  @hit.Released</h6>
+                                    <h6><b>Cast:</b>  @hit.Actors</h6>
+
+                                    <p>@hit.Plot</p>
+                                </td>
+
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+    </body>
+
+
+
+
+
+
+
+
+
+<style>
+     #myTable_wrapper {
+        margin-top: 0px !important;
+    }
+
+    .dataTables_empty {
+        background: transparent !important;
+        background-color: transparent !important;
+        color: #363e98 !important;
+    }
+    table.dataTable thead th,
+    table.dataTable thead td {
+        padding: 10px 18px;
+        border-bottom: 1px solid #fae800 !important;
+    }
+
+    .dataTables_wrapper.no-footer .dataTables_scrollBody {
+
+        border: none !important;
+    }
+
+    thead, tbody, tfoot, tr, td, th {
+        border: none !important;
+        border-bottom: 1px solid #363e98 !important;
+    }
+
+    #titleLabel {
+        font-size: 22px;
+    }
+    #searchBody {
+        background-image: url('/Content/bb inside color.png');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: auto 100%;
+        height: 100vh;
+        margin: 20px;
+        padding: 0px;
+        overflow: hidden;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+
+    #searchBox {
+        margin-right: 1rem;
+        width: 100%;
+    }
+
+    #searchButton {
+        font-weight: 600;
+        text-align: center;
+        padding: 0;
+        width: 6rem;
+    }
+
+        #searchButton:hover {
+            font-weight: 900;
+            text-align: center;
+            padding: 0;
+            width: 6rem;
+        }
+
+        #myTable_length {
+
+            color: #eee;
+            font-weight: 900;
+        }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        color: #eee !important;
+        background-color: #363e98 !important;
+    }
+        .dataTables_wrapper .dataTables_paginate .paginate_button .next .disabled {
+            background-color: #fae800 !important;
+        }
+    .dataTables_wrapper .dataTables_paginate .paginate_button .active {
+        color: #fae800 !important;
+        background-color: #fae800 !important;
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button .previous {
+      
+    }
+
+    .dataTables_info {
+        color: #eee !important;
+    }
+
+    input[type="radio"] {
+        appearance: none;
+        width: 1em;
+        height: 1em;
+        border: 1px solid #999;
+        border-radius: 50%;
+        background-color: #363e98;
+        vertical-align: middle;
+        margin: 0;
+        padding: 0;
+    }
+
+        input[type="radio"]:checked {
+            background-color: #fae800;
+            border: 4px solid #363e98;
+        }
+
+
+        input[type="radio"]:hover {
+            background-color: #fae800;
+        }
+
+    #tableDisplay {
+        height: 50vh;
+        margin: 0px;
+    }
+        
+
+</style>
+
+
+
