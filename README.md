@@ -65,6 +65,13 @@ field type: string\n
 Make sure only "stored" is checked off\n
 Add Field
 
+
+\n\n
+name: Runtime\n
+field type: string\n
+Make sure only "stored" is checked off\n
+Add Field
+
 \n\n
 name: imdbRating\n
 field type: string\n
@@ -72,13 +79,13 @@ Make sure only "stored" is checked off\n
 Add Field
 
 \n\n
-name: imdbId\n
+name: imdbID\n
 field type: string\n
 Make sure only "stored" is checked off\n
 Add Field
 
 ### 4) Index the provided Movie Data; run this command in your Solr doqnload directory
-For easse of use, you can move the `movieData` folder to your Desktop for this step.\n
+For ease of use, you can move the `movieData` folder to your Desktop for this step.\n
 In the Solr project directory, again in terminal, run:\n
 `java -jar -Dc=blockbuster -Dauto example\exampledocs\post.jar C:\Users\<your_user>\Desktop\movieData\*.json`\n
 To test that this suceeded, go back into the Admin UI in your browser. Select the blockbuster Core, click the Query tab. In the `q` field, enter `*:*`, then scroll down, and click `Execute Query` (or a similarly named button). If it is successful, you should see JSON data to the right with Movie objects, having Title, Released, Cast, and more fields.
