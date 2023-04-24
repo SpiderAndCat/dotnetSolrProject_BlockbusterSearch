@@ -31,15 +31,63 @@ In your terminal, run the following commands, and follow the prompts as they app
 \n\n
 
 ### (3) You will manually need to set each Column to string before indexing
+Make sure the collection was created successfully by going in your browser to `localhost:8983/solr/#`. Then in the left column, click Core Selector to see if blockbuster is there.
+\n\n
+Select `blockbuster`\n
+Then, we need to add the columns and types, so that the auto indexer does not confuse the dataset types.\n\n
+Click Schema, and then add each of the following Fields by clicking Add Field for each:\n
+name: Title\n
+field type: string\n
+Make sure only "stored" is checked off\n
+Add Field
+
+\n\n
+name: Released\n
+field type: string\n
+Make sure only "stored" is checked off\n
+Add Field
+
+\n\n
+name: Plot\n
+field type: string\n
+Make sure only "stored" is checked off\n
+Add Field
+
+\n\n
+name: Actors\n
+field type: string\n
+Make sure only "stored" is checked off\n
+Add Field
+
+\n\n
+name: Genre\n
+field type: string\n
+Make sure only "stored" is checked off\n
+Add Field
+
+\n\n
+name: imdbRating\n
+field type: string\n
+Make sure only "stored" is checked off\n
+Add Field
+
+\n\n
+name: imdbId\n
+field type: string\n
+Make sure only "stored" is checked off\n
+Add Field
 
 ### 4) Index the provided Movie Data; run this command in your Solr doqnload directory
-java -jar -Dc=blockbuster -Dauto example\exampledocs\post.jar C:\Users\<your_user>\Desktop\movieData\*.json
+For easse of use, you can move the `movieData` folder to your Desktop for this step.\n
+In the Solr project directory, again in terminal, run:\n
+`java -jar -Dc=blockbuster -Dauto example\exampledocs\post.jar C:\Users\<your_user>\Desktop\movieData\*.json`\n
+To test that this suceeded, go back into the Admin UI in your browser. Select the blockbuster Core, click the Query tab. In the `q` field, enter `*:*`, then scroll down, and click `Execute Query` (or a similarly named button). If it is successful, you should see JSON data to the right with Movie objects, having Title, Released, Cast, and more fields.
 
-### (5) Shutdown server after use
+### (5) Shutdown server after use (can skip for now)
 `bin\solr stop -all`
 
-### (6) Resume server
-`bin\solr start -c -p 8983 -s example\cloud\node1\solr`
+### (6) Resume server (can skip for now)
+`bin\solr start -c -p 8983 -s example\cloud\node1\solr` (may be a different node, like node1 -- check the directory if it doesn't work)
 
 **troubleshoot:** if errors are encoutered, try to delete all replicas on second port. have 1 replica per shard
 
@@ -48,9 +96,13 @@ java -jar -Dc=blockbuster -Dauto example\exampledocs\post.jar C:\Users\<your_use
 All Package dependancies should be included in the Git repo. If not, you will need to use PM> to: `install-package SolrNet`
 
 ###
-**troubleshoot:** On some machines, the Solr dataset migration may not line up to the same Node naming convention. This will cause the Solr file migration, and the Visual Studio code, to be out of sync.
+**troubleshoot:** On some machines, the Solr dataset migration may not line up to the same Node naming convention. This will cause the Solr file migration, and the Visual Studio code, to be out of sync.\n\n
 
-Make sure to change 
+Make sure that the node, shard, and replica name in the Solr Admin console in your browser MATCH the url in Visual studio (and for Solr Step 6). The Visual Studio line is in `Controller\HomeController.cs`, `Index()`, \n\n
+
+### (2) Click Build and Run in Visual Studio!
+The Home controller Index action is where the demo app is targetted to launch from. Your browser should auto open, otherwise go to `http://localhost*8983`\n\n
+**Troubleshoot:** HTTPS should be disabled for the localhost running in the project, so the browser should accept http. You may need to go into Project > Properties > Web to change the project URL to http from https if you encounter that error.
 
 
 ### DISCLAIMER: 
