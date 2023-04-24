@@ -100,6 +100,10 @@ To test that this suceeded, go back into the Admin UI in your browser. Select th
 **troubleshoot:** if errors are encoutered, try to delete all replicas on second port. have 1 replica per shard
 
 ## ASP.NET App Setup
+
+Make sure your Solr sever is running. If you shut it down before, you will need to start it again using Solr step (6)
+
+
 ### (1) Open the Visual Studio Project in the GitHub repo by double clicking the file `BlockbusterRentals\BlockbusterRentals.sln`
 All Package dependancies should be included in the Git repo. If not, you will need to use PM> to: `install-package SolrNet`
 
