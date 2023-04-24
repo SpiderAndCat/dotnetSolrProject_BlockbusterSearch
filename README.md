@@ -122,10 +122,15 @@ Or, if you are setting up Solr for the first time, and you haven't used it befor
 The Home controller Index action is where the demo app is targetted to launch from. Your browser should auto open, otherwise go to `http://localhost*8983`
 
 
-**Troubleshoot:** HTTPS should be disabled for the localhost running in the project, so the browser should accept http. You may need to go into Solution Explorer > right click Project > Properties > Web to change the project URL to http from https if you are prompted to use HTTPS.
+**Troubleshoot:** HTTPS should be disabled for the localhost running in the project, so the browser should accept http. 
+
+If it prompts you for HTTPS when you run the app, do not click Yes or No, click the "X" to close that dialog box. Then, your browser should load the website properly.
+
+If it does not load the site, and gives you an HTTPS error, you may need to go into the Project's Solution Explorer > right click Project > click Properties > click Web > change the project URL to http from https. Clean the project, and build and run again.
 
 
 ### Voila! Enjoy your searching!
+Select if you want to search for movie Titles, Cast members, Genres, Ratings (/10), Release years, and more!
 
 ### DISCLAIMER: 
 The movie data was gathered with the OMDb API. Movie data is not guarenteed to be accurate, and it has not been screened for inappropriate or offensive content. There are about 3,000 movie entries, since many of the several-thousand Movie records retreieved from the OMDb database were not official IMDb movie record Ids -- ie, Movie Ids are random, and some Id numbers do not pertain to an actual movie. This is also a personal project, and not officially from Blockbuster.
