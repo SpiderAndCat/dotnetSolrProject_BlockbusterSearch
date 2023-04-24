@@ -1,3 +1,8 @@
+![homepage](https://user-images.githubusercontent.com/130514366/233876718-50f12ca1-9c64-40b3-821d-0327be8e4807.PNG)
+![cast search](https://user-images.githubusercontent.com/130514366/233876725-1bd122cd-005c-463b-a3bc-4c5367e79562.PNG)
+
+![rating search](https://user-images.githubusercontent.com/130514366/233876731-747f83c7-0aeb-4fc0-8f0c-038ce04f5882.PNG)
+
 ## Solr Setup
 ### (1) Create the new dataset Solr Collection
 `bin\solr create -c blockbuster -s 2 -rf 2`
